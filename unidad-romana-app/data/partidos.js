@@ -354,7 +354,15 @@ M("40176",2026,"Apertura","2026-05-16","Ahí No Me Servís",false,1,5,[1,0],[0,0
 
 M("40165",2026,"Apertura","2026-06-13","C.A.R.U.",true,4,3,[3,0],[0,0,0],[["goal","Guido Lucas Zamolo"],["goal","Martin Najle"],["goal","Patricio Coplo"],["goal","Mariano Eizmendi"],["yellow","Guido Lucas Zamolo"],["yellow","Patricio Coplo"],["yellow","Mariano Eizmendi"]],"https://www.lachacrafutbol.com.ar/web/event/40165/"),
 
-M("40188",2026,"Apertura","2026-06-20","Los Tulos",true,2,6,[1,0],[0,0,0],[["goal","Guido Lucas Zamolo"],["goal","Guido Pochettino"],["yellow","Patricio Coplo"]],"https://www.lachacrafutbol.com.ar/web/event/40188/")
+M("40188",2026,"Apertura","2026-06-20","Los Tulos",true,2,6,[1,0],[0,0,0],[["goal","Guido Lucas Zamolo"],["goal","Guido Pochettino"],["yellow","Patricio Coplo"]],"https://www.lachacrafutbol.com.ar/web/event/40188/"),
+
+M("43098",2026,"Clausura","2026-08-22","Deportivo Resaca",false,4,0,[0,0],[0,0,0],[["goal","Cristian Nadir Bohl"],["goal","Ezequiel Alberto De Simone"],["goal","Guido Lucas Zamolo"],["goal","Nicolás Tardella"]],"https://www.lachacrafutbol.com.ar/web/event/43098/"),
+
+M("43100",2026,"Clausura","2026-08-29","Graduados F.C.",true,2,0,[0,0],[0,0,0],[["goal","Cristian Nadir Bohl"],["goal","Guido Lucas Zamolo"]],"https://www.lachacrafutbol.com.ar/web/event/43100/"),
+
+M("43111",2026,"Clausura","2026-09-05","Eber Ludueña",false,2,2,[0,0],[0,0,0],[["goal","Guido Lucas Zamolo"],["goal","Mariano Miqueo"]],"https://www.lachacrafutbol.com.ar/web/event/43111/"),
+
+M("43123",2026,"Clausura","2026-09-19","Toros FFAA",true,1,2,[3,0],[0,0,0],[["goal","Cristian Nadir Bohl"],["yellow","Cristian Nadir Bohl"],["yellow","Mariano Orio"],["yellow","Sebastian Kunichek"]],"https://www.lachacrafutbol.com.ar/web/event/43123/")
 
 ].map(m=>({
   ...m,
