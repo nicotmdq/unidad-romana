@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unidad Romana — Historial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow">ARCHIVO HISTÓRICO · LA CHACRA FÚTBOL</div>
+        <h1>Unidad Romana</h1>
+        <p>Resultados, goleadores y disciplina por temporada.</p>
+      </div>
+      <div class="badge">UR</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="filters panel">
+      <div class="field"><label for="yearFilter">Año</label><select id="yearFilter"></select></div>
+      <div class="field"><label for="tournamentFilter">Campeonato</label><select id="tournamentFilter"></select></div>
+      <button id="clearFilters" class="ghost">Limpiar filtros</button>
+      <div class="coverage" id="coverage"></div>
+    </section>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="panel section">
+      <div class="section-head">
+        <div><span class="kicker">JUGADORES</span><h2>Tabla histórica</h2></div>
+        <input id="playerSearch" class="search" placeholder="Buscar jugador…" />
+      </div>
+      <div class="notice">Las estadísticas individuales sólo suman eventos <strong>confirmados</strong>. Cuando la fuente no permite distinguir inequívocamente el ícono de gol/tarjeta, el dato queda pendiente y no se infiere.</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Jugador</th><th class="num">⚽ Goles</th><th class="num">🟨 Amarillas</th><th class="num">🟥 Rojas</th><th>Estado</th></tr></thead>
+        <tbody id="playersBody"></tbody>
+      </table></div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-head">
+        <div><span class="kicker">RIVALES</span><h2>Historial por rival</h2></div>
+        <input id="rivalSearch" class="search" placeholder="Buscar rival…" />
+      </div>
+      <div class="notice neutral">Los nombres equivalentes de un mismo rival se agrupan para evitar duplicados históricos. La tabla respeta los filtros de año y campeonato seleccionados arriba.</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rival</th><th class="num">PJ</th><th class="num">G</th><th class="num">E</th><th class="num">P</th><th class="num">GF</th><th class="num">GC</th><th class="num">Dif.</th><th class="num">Efect.</th></tr></thead>
+        <tbody id="rivalsBody"></tbody>
+      </table></div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-head"><div><span class="kicker">PARTIDOS</span><h2>Partidos cargados</h2></div><div id="matchCount" class="muted"></div></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Fecha</th><th>Campeonato</th><th>Partido</th><th class="num">Resultado</th><th>Estado</th><th>Fuente</th></tr></thead>
+        <tbody id="matchesBody"></tbody>
+      </table></div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">Unidad Romana · Base histórica provisional · Los datos pendientes nunca se completan por inferencia.</footer>
+  <script src="data/partidos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
