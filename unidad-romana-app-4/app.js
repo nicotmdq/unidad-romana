@@ -1,6 +1,7 @@
 const D=window.UR_DATA; const $=s=>document.querySelector(s);
 const year=$('#yearFilter'), tourn=$('#tournamentFilter'), search=$('#playerSearch'), rivalSearch=$('#rivalSearch');
 const norm=s=>(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+let rivalSort={key:'pj',dir:'desc'};
 
 // Equivalencias editoriales de rivales: sólo variantes evidentes de acentos, sufijos y escritura.
 const RIVAL_ALIASES={
@@ -24,6 +25,11 @@ function init(){
   const years=[...new Set(D.matches.map(m=>m.year))].sort(); year.innerHTML='<option value="">Todos los años</option>'+years.map(y=>`<option>${y}</option>`).join('');
   refreshTournaments(); render();
   year.onchange=()=>{refreshTournaments();render()}; tourn.onchange=render; search.oninput=renderPlayers; rivalSearch.oninput=renderRivals;
+  document.querySelectorAll('#rivalsTable th[data-sort]').forEach(th=>th.onclick=()=>{
+    const key=th.dataset.sort;
+    rivalSort = rivalSort.key===key ? {key,dir:rivalSort.dir==='asc'?'desc':'asc'} : {key,dir:key==='name'?'asc':'desc'};
+    renderRivals();
+  });
   $('#clearFilters').onclick=()=>{year.value='';refreshTournaments();tourn.value='';search.value='';rivalSearch.value='';render()};
 }
 function refreshTournaments(){
@@ -57,14 +63,33 @@ function rivalRows(){
    const x=map.get(name); x.pj++; x.gf+=m.ur; x.gc+=m.opp;
    if(m.ur>m.opp)x.w++; else if(m.ur<m.opp)x.l++; else x.d++;
  });
- return [...map.values()].map(x=>({...x,diff:x.gf-x.gc,eff:x.pj?((x.w*3+x.d)/(x.pj*3)*100):0})).sort((a,b)=>b.pj-a.pj||a.name.localeCompare(b.name));
+ return [...map.values()].map(x=>({...x,diff:x.gf-x.gc,eff:x.pj?((x.w*3+x.d)/(x.pj*3)*100):0}));
 }
 function renderRivals(){
  const q=norm(rivalSearch.value||''); const rows=rivalRows().filter(x=>norm(x.name).includes(q));
+ const mult=rivalSort.dir==='asc'?1:-1;
+ rows.sort((a,b)=>{
+   const av=a[rivalSort.key], bv=b[rivalSort.key];
+   if(rivalSort.key==='name') return mult*av.localeCompare(bv,'es',{sensitivity:'base'});
+   return mult*(av-bv) || a.name.localeCompare(b.name,'es',{sensitivity:'base'});
+ });
+ document.querySelectorAll('#rivalsTable th[data-sort]').forEach(th=>{
+   th.classList.toggle('active-sort',th.dataset.sort===rivalSort.key);
+   const mark=th.querySelector('.sort-mark'); if(mark) mark.textContent=th.dataset.sort===rivalSort.key?(rivalSort.dir==='asc'?'▲':'▼'):'↕';
+ });
  $('#rivalsBody').innerHTML=rows.length?rows.map(x=>`<tr><td><strong>${x.name}</strong></td><td class="num">${x.pj}</td><td class="num good-text">${x.w}</td><td class="num">${x.d}</td><td class="num bad-text">${x.l}</td><td class="num">${x.gf}</td><td class="num">${x.gc}</td><td class="num ${x.diff>0?'good-text':x.diff<0?'bad-text':''}">${x.diff>0?'+':''}${x.diff}</td><td class="num">${x.eff.toFixed(1).replace('.',',')}%</td></tr>`).join(''):'<tr><td colspan="9" class="muted">No hay rivales para este filtro.</td></tr>';
 }
 function renderMatches(){
- const ms=[...filtered()].sort((a,b)=>(b.date||'').localeCompare(a.date||'')); $('#matchCount').textContent=`${ms.length} partidos`;
+ const indexed=filtered().map((m,i)=>({m,i}));
+ indexed.sort((a,b)=>{
+   const ad=a.m.date, bd=b.m.date;
+   if(ad&&bd) return bd.localeCompare(ad);
+   if(ad&&!bd) return -1;
+   if(!ad&&bd) return 1;
+   if(a.m.year!==b.m.year) return b.m.year-a.m.year;
+   return b.i-a.i;
+ });
+ const ms=indexed.map(x=>x.m); $('#matchCount').textContent=`${ms.length} partidos`;
  $('#matchesBody').innerHTML=ms.map(m=>{const fixture=m.home===true?`Unidad Romana vs ${m.opponent}`:m.home===false?`${m.opponent} vs Unidad Romana`:`Unidad Romana – ${m.opponent}`;const score=m.home===false?`${m.opp} – ${m.ur}`:`${m.ur} – ${m.opp}`; const date=m.date?new Date(m.date+'T12:00:00').toLocaleDateString('es-AR'):'—';return `<tr><td>${date}</td><td>${m.tournament} ${m.year}</td><td>${fixture}</td><td class="num result">${score}</td><td><span class="pill ${m.individualComplete?'ok':'pending'}">${m.individualComplete?'Completo':'Individual pendiente'}</span></td><td><a class="source" target="_blank" rel="noopener" href="${m.url}">La Chacra ↗</a></td></tr>`}).join('');
 }
 init();

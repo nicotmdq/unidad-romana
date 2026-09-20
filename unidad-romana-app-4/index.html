@@ -49,8 +49,8 @@
         <input id="rivalSearch" class="search" placeholder="Buscar rival…" />
       </div>
       <div class="notice neutral">Los nombres equivalentes de un mismo rival se agrupan para evitar duplicados históricos. La tabla respeta los filtros de año y campeonato seleccionados arriba.</div>
-      <div class="table-wrap"><table>
-        <thead><tr><th>Rival</th><th class="num">PJ</th><th class="num">G</th><th class="num">E</th><th class="num">P</th><th class="num">GF</th><th class="num">GC</th><th class="num">Dif.</th><th class="num">Efect.</th></tr></thead>
+      <div class="table-wrap"><table id="rivalsTable">
+        <thead><tr><th data-sort="name">Rival <span class="sort-mark">↕</span></th><th class="num" data-sort="pj">PJ <span class="sort-mark">▼</span></th><th class="num" data-sort="w">G <span class="sort-mark">↕</span></th><th class="num" data-sort="d">E <span class="sort-mark">↕</span></th><th class="num" data-sort="l">P <span class="sort-mark">↕</span></th><th class="num" data-sort="gf">GF <span class="sort-mark">↕</span></th><th class="num" data-sort="gc">GC <span class="sort-mark">↕</span></th><th class="num" data-sort="diff">Dif. <span class="sort-mark">↕</span></th><th class="num" data-sort="eff">Efect. <span class="sort-mark">↕</span></th></tr></thead>
         <tbody id="rivalsBody"></tbody>
       </table></div>
     </section>
