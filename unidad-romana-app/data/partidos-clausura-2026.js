@@ -6,5 +6,8 @@ window.UR_DATA.matches.push(
     ["goal","Mariano Miqueo"],
     ["goal","Guido Pochettino"],
     ["yellow","Guido Lucas Zamolo"]
-  ],"https://www.lachacrafutbol.com.ar/web/event/43124/")
+  ],"https://www.lachacrafutbol.com.ar/web/event/43124/",{
+    players:["Christian Olza","Cristian Nadir Bohl","Ezequiel Alberto De Simone","Ezequiel Erviti","Guido Lucas Zamolo","Guido Pochettino","Juan Castelli","Leonardo López","Luciano Orcajada","Mariano Orio","Mariano Miqueo","Martin Najle","Matías Prado","Maxi Najot","Nicolás Tardella","Nicolás Valdez","Patricio Coplo","Sebastian Jensen","Sebastian Kunichek"],
+    individualComplete:true
+  })
 );
