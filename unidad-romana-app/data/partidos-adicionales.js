@@ -38,9 +38,9 @@ window.UR_DATA.matches.push(
     sourceSeason:"Apertura 2019"
   }),
   M("promo-2019-mufasa",2019,"Promoción","2019-12-07","Mufasa F.C.",true,1,1,[0,0],[0,0,0],[
-    ["goal","Guido Pochettino"]
+    ["goal","Patricio Erviti"]
   ],"https://www.lachacrafutbol.com.ar/web/event/unidad-romana-vs-mufasa-f-c/",{
-    players:["Guido Pochettino"],
+    players:["Patricio Erviti"],
     individualComplete:true,
     sourceSeason:"Clausura 2019"
   }),
