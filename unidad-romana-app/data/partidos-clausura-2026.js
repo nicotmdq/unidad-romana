@@ -4,7 +4,7 @@ window.UR_DATA.matches.push(
     ["goal","Guido Lucas Zamolo"],
     ["goal","Guido Lucas Zamolo"],
     ["goal","Mariano Miqueo"],
-    ["goal","Nicolás Tardella"],
+    ["goal","Guido Pochettino"],
     ["yellow","Guido Lucas Zamolo"]
   ],"https://www.lachacrafutbol.com.ar/web/event/43124/")
 );
