@@ -1,0 +1,54 @@
+name: Importar partido de La Chacra
+
+on:
+  workflow_dispatch:
+    inputs:
+      event_id:
+        description: "ID del evento de La Chacra (ej: 43124)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  capturar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalar dependencias del scraper
+        working-directory: ur-historico-skill
+        run: npm install
+
+      - name: Instalar Chromium de Playwright
+        working-directory: ur-historico-skill
+        run: npx playwright install --with-deps chromium
+
+      - name: Capturar y analizar partido
+        working-directory: ur-historico-skill
+        run: node scripts/scrape-match.js "${{ inputs.event_id }}"
+
+      - name: Mostrar extracción
+        if: always()
+        working-directory: ur-historico-skill
+        run: |
+          if [ -f "capturas/${{ inputs.event_id }}-datos.json" ]; then
+            cat "capturas/${{ inputs.event_id }}-datos.json"
+          fi
+
+      - name: Subir evidencia y diagnóstico
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lachacra-${{ inputs.event_id }}
+          path: ur-historico-skill/capturas/
+          if-no-files-found: warn
+          retention-days: 30
