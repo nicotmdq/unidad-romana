@@ -1,0 +1,1 @@
+{"name":"unidad-romana-historico-skill","version":"0.2.0","private":true,"type":"commonjs","scripts":{"scrape":"node scripts/scrape-match.js"},"dependencies":{"playwright":"^1.63.0"}}
